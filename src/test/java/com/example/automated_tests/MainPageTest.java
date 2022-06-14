@@ -46,7 +46,7 @@ public class MainPageTest {
 
             //Find password box, select it, enter password
             WebElement password = driver.findElement(By.id("password"));
-            password.sendKeys("1234");
+            password.sendKeys("123");
 
             Thread.sleep(1500);
 
