@@ -1,19 +1,16 @@
 package com.example.automated_tests;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import java.net.URL;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
 
 public class MainPageTest {
     WebDriver driver;    //Creating WebDriver
@@ -40,7 +37,7 @@ public class MainPageTest {
 
             //Find username box, select it, enter username
             WebElement username = driver.findElement(By.id("username"));
-            username.sendKeys("Vincent");
+            username.sendKeys("AutomatedTests");
 
             Thread.sleep(1500);
 
@@ -77,14 +74,11 @@ public class MainPageTest {
         }
     }
 
-
     @Test
-    public void testVgrollBasicPayrollFunctions() throws InterruptedException {
-        /**         This tests the payroll functions         **/
-
+    public void testProcessPayroll() {
         try {
             vrollLogin();    //I run this method before the tests to ensure I am logged in
-            driver.manage().window().maximize();    //This maximizes the browser window
+            Thread.sleep(2000);
         } catch (Exception e) {
             System.out.println("\nStack Trace:");
             e.printStackTrace();
@@ -92,11 +86,88 @@ public class MainPageTest {
             fail("Log In Failed");
         }
 
-        Thread.sleep(2000);
-        WebElement currentElement;
+        try {//Creating a payroll and processing it
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[3]/nav/ul/li[1]/a")).click();    //Xpath to the "Payroll" button
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[2]/div")).click();    //Xpath to "Start New Payroll"
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[1]/div/div/input")).sendKeys("01/01/2020");     //Xpath to "Period Begin Date"
+            Thread.sleep(500);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[2]/div/div/input")).sendKeys("01/07/2020");     //Xpath to "Period End Date"
+            Thread.sleep(500);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[3]/div/div/input")).sendKeys("01/08/2020");     //Xpath to "Check Date"
+            Thread.sleep(500);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[4]/div/div/input")).sendKeys("RT - " + java.time.LocalDate.now());     //Xpath to "Description"
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[14]/div/div/div[2]/button")).click(); //Click Status
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[14]/div/div/div[2]/div/div/div/div/div/div/table/tbody/tr[2]/td")).click();   //Click Completed
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[2]/div/div[1]/div")).click();    //Click Save
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[5]")).click(); //Filter
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[1]/div[1]/div/input")).sendKeys("01/01/2020");   //Period begin from
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[2]/div[1]/div/input")).sendKeys("01/08/2020");    //Check date from
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[3]/div[1]/div/div[2]/button")).click();   //Payroll Status
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[3]/div[1]/div/div[2]/div/div/div/div/div/div/table/tbody/tr[2]/td")).click(); //Completed
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr/td[10]/div[2]/div[1]/i")).click();  //Click payrolls 'Cog Wheel'
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr/td[10]/div[2]/div[2]/div")).click(); //Click Process Payroll
+            Thread.sleep(20000);
+
+            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/button")).click();    //Exit async task
+            Thread.sleep(1000);
+
+            driver.quit();
+        } catch (Exception e) {
+            System.out.println("\nStack Trace:");
+            e.printStackTrace();
+            driver.quit();
+            fail("start new payroll failed");
+        }
+    }
+
+    @Test
+    public void testVgrollBasicPayrollFunctions() {
+        /**         This tests the payroll functions         **/
+
+        try {
+            vrollLogin();    //I run this method before the tests to ensure I am logged in
+            //driver.manage().window().maximize();    //This maximizes the browser window
+        } catch (Exception e) {
+            System.out.println("\nStack Trace:");
+            e.printStackTrace();
+            driver.quit();
+            fail("Log In Failed");
+        }
 
         //Testing start new payroll
         try {
+            Thread.sleep(2000);
+            WebElement currentElement;
+
+
             //Go to Payroll menu
             currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[3]/nav/ul/li[1]/a"));    //Xpath to the "Payroll" button
             currentElement.click();
@@ -141,7 +212,7 @@ public class MainPageTest {
 
             driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[10]/div[2]/div[2]/div[1]")).click(); //Calculate all checks
 
-            Thread.sleep(55000);
+            Thread.sleep(20000);
 
             driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/button")).click();    //exits progress pop up
 
@@ -214,53 +285,55 @@ public class MainPageTest {
             driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[3]/nav/ul/li[3]/a")).click();    //Clicking on "Employees"
             Thread.sleep(1000);
 
+            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[3]/nav/ul/li[3]/ul/li[1]/a/p")).click();    //All Employees
+            Thread.sleep(1000);
+
             driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[2]/div")).click();    //Clicking on "+ New"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[1]/div[1]/div/div/input")).sendKeys("TEID0001");    //Entering "Employee ID"
+            driver.findElement(By.name("employeeId")).sendKeys("TEID0001");    //Entering "Employee ID"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[1]/div[2]/div[2]/div[3]/div")).click();  //Unlock SSN
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div/div[3]/div[2]/div[3]/div[2]/div[3]/div/i")).click();  //Unlock SSN
             Thread.sleep(1500);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[1]/div[2]/div[2]/div[1]/div/div/input")).sendKeys("629745855");    //Entering SSN
+            driver.findElement(By.name("socialSecurityNumber")).sendKeys("629745855");    //Entering SSN
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[2]/div[1]/div/div/input")).sendKeys("Man");    //Entering "First Name"
+            driver.findElement(By.name("firstName")).sendKeys("Man");    //Entering "First Name"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[2]/div[3]/div/div/input")).sendKeys("Person"); //Entering "Last name"
+            driver.findElement(By.name("lastName")).sendKeys("Person"); //Entering "Last name"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[3]/div[1]/div/div/input")).sendKeys("06/27/1995"); //Entering "Birth Date"
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div/div[3]/div[4]/div[1]/div/div/input")).sendKeys("06/27/1995"); //Entering "Birth Date"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[3]/div[2]/div/div/input")).sendKeys("01/01/2022"); //Entering "Hire Date"
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div/div[3]/div[4]/div[2]/div/div/input")).sendKeys("01/01/2022"); //Entering "Hire Date"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[4]/div[1]/div/div/input")).sendKeys("12345 Address");  //Entering "Address"
+            driver.findElement(By.name("address1")).sendKeys("12345 Address");  //Entering "Address"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[4]/div[3]/div/div/input")).sendKeys("City");   //Entering "City"
+            driver.findElement(By.name("city")).sendKeys("City");   //Entering "City"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[5]/div[1]/div/div/div[2]/button")).click();    //Clicking "State"
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div/div[3]/div[6]/div[1]/div/div/div[2]/button")).click();    //Clicking "State"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[5]/div[1]/div/div/div[2]/div/div/div/div/div/div/table/tbody/tr[1]/td")).click();  //Click Alabama
+            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div/div[3]/div[6]/div[1]/div/div/div[2]/div/div/div/div/div/div/table/tbody/tr[1]/td")).click();  //Click Alabama
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[5]/div[2]/div/div/div[2]/button/i")).click();    //Click "Home State"
+            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div/div[3]/div[6]/div[2]/div/div/div[2]/button")).click();    //Click "Home State"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[5]/div[2]/div/div/div[2]/div/div/div/div/div/div/table/tbody/tr[1]/td")).click();  //Click Alabama
+            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div/div[3]/div[6]/div[2]/div/div/div[2]/div/div/div/div/div/div/table/tbody/tr[1]/td")).click();  //Click Alabama
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[5]/div[3]/div/div/input")).sendKeys("00000");      //Entering "Zip Code"
+            driver.findElement(By.name("zipCode")).sendKeys("00000");      //Entering "Zip Code"
             Thread.sleep(1000);
 
-
-            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[6]/div[1]/div/div/input")).sendKeys("2140000000"); //Entering "Phone Number"
+            driver.findElement(By.name("primaryPhone")).sendKeys("2140000000"); //Entering "Phone Number"
             Thread.sleep(1000);
 
             driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[2]/div/div[1]/div")).click();        //Clicking "Save"
@@ -671,38 +744,6 @@ public class MainPageTest {
     }
 
 
-
-    //Example Test
-    @Test
-    public void fakeTest() throws InterruptedException {
-        driver.get("https://www.facebook.com/");      //Got to facebook.com
-
-        Thread.sleep(1000);     //Small wait to allow user to see what's happening
-
-        driver.manage().window().maximize();
-
-        WebElement currentElement = driver.findElement(By.xpath("//*[@id=\"email\"]"));     //Assigning "mail or Phone number" to currentElement
-        currentElement.sendKeys("FakeEmail12345@ymail.com");                          //Sending a fake email address to the element
-
-        Thread.sleep(1000);     //Small wait to allow user to see what's happening
-
-        driver.findElement(By.xpath("//*[@id=\"pass\"]")).sendKeys("Password"); //Sending an incorrect facebook password to the "Password" Element
-
-        Thread.sleep(1000);     //Small wait to allow user to see what's happening
-
-        currentElement = driver.findElement(By.name("login"));      //Clicking on the "Log in" button
-        currentElement.click();
-
-        Thread.sleep(1000);     //Small wait to allow user to see what's happening
-
-        assertEquals(driver.getTitle(), "Log into Facebook");    //Checks that the title of the page matches "Log into Facebook"
-
-        driver.close();     //Closes the driver
-    }
-
-
-
-
     //Methods
     public void vrollLogin() throws InterruptedException {
         /**                 Throw this before a test so you can log in                      **/
@@ -714,7 +755,7 @@ public class MainPageTest {
 
         //Find username box, select it, enter username
         WebElement username = driver.findElement(By.id("username"));
-        username.sendKeys("Vincent");       //Put your username in the ""
+        username.sendKeys("AutomatedTests");       //Put your username in the ""
 
         Thread.sleep(1000);
 
