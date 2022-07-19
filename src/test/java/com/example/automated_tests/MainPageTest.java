@@ -95,13 +95,13 @@ public class MainPageTest {
             Thread.sleep(1000);
 
             driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[1]/div/div/input")).sendKeys("01/01/2020");     //Xpath to "Period Begin Date"
-            Thread.sleep(500);
+            Thread.sleep(1000);
 
             driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[2]/div/div/input")).sendKeys("01/07/2020");     //Xpath to "Period End Date"
-            Thread.sleep(500);
+            Thread.sleep(1000);
 
             driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[3]/div/div/input")).sendKeys("01/08/2020");     //Xpath to "Check Date"
-            Thread.sleep(500);
+            Thread.sleep(1000);
 
             driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[4]/div/div/input")).sendKeys("RT - " + java.time.LocalDate.now());     //Xpath to "Description"
             Thread.sleep(1000);
@@ -113,7 +113,7 @@ public class MainPageTest {
             Thread.sleep(1000);
 
             driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[2]/div/div[1]/div")).click();    //Click Save
-            Thread.sleep(1000);
+            Thread.sleep(1500);
 
             driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[5]")).click(); //Filter
             Thread.sleep(1000);
@@ -206,7 +206,7 @@ public class MainPageTest {
 
             Thread.sleep(7000);     //Give plenty of time for vgroll to create the payroll
 
-            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[10]/div[2]/div[1]/i")).click();  //Click payrolls 'Cog Wheel'
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[10]/div[2]/div[1]")).click();  //Click payrolls 'Cog Wheel'
 
             Thread.sleep(1000);
 
@@ -349,7 +349,7 @@ public class MainPageTest {
         /**     Delete the Employee    **/
         try {
             driver.findElement(By.name("__search__")).sendKeys("Person");    //Searching for created employee
-            Thread.sleep(1000);
+            Thread.sleep(1500);
 
 
             driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr/td[8]/div[4]/i")).click(); //Clicking delete button
