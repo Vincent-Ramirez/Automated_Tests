@@ -94,13 +94,13 @@ public class MainPageTest {
             driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[2]/div")).click();    //Xpath to "Start New Payroll"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[1]/div/div/input")).sendKeys("01/01/2020");     //Xpath to "Period Begin Date"
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[1]/div/div/input")).sendKeys("05/01/2022");     //Xpath to "Period Begin Date"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[2]/div/div/input")).sendKeys("01/07/2020");     //Xpath to "Period End Date"
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[2]/div/div/input")).sendKeys("05/07/2022");     //Xpath to "Period End Date"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[3]/div/div/input")).sendKeys("01/08/2020");     //Xpath to "Check Date"
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[3]/div/div/input")).sendKeys("05/08/2022");     //Xpath to "Check Date"
             Thread.sleep(1000);
 
             driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[4]/div/div/input")).sendKeys("RT - " + java.time.LocalDate.now());     //Xpath to "Description"
@@ -118,10 +118,10 @@ public class MainPageTest {
             driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[5]")).click(); //Filter
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[1]/div[1]/div/input")).sendKeys("01/01/2020");   //Period begin from
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[1]/div[1]/div/input")).sendKeys("05/01/2022");   //Period begin from
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[2]/div[1]/div/input")).sendKeys("01/08/2020");    //Check date from
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[2]/div[1]/div/input")).sendKeys("05/08/2022");    //Check date from
             Thread.sleep(1000);
 
             driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[3]/div[1]/div/div[2]/button")).click();   //Payroll Status
@@ -182,17 +182,17 @@ public class MainPageTest {
             Thread.sleep(1000);
 
             currentElement = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[1]/div/div/input"));     //Xpath to "Period Begin Date"
-            currentElement.sendKeys("04/01/2022");
+            currentElement.sendKeys("06/01/2022");
 
             Thread.sleep(500);
 
             currentElement = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[2]/div/div/input"));     //Xpath to "Period End Date"
-            currentElement.sendKeys("04/07/2022");
+            currentElement.sendKeys("06/07/2022");
 
             Thread.sleep(500);
 
             currentElement = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[3]/div/div/input"));     //Xpath to "Check Date"
-            currentElement.sendKeys("04/08/2022");
+            currentElement.sendKeys("06/08/2022");
 
             Thread.sleep(500);
 
