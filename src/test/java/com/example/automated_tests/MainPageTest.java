@@ -255,8 +255,6 @@ public class MainPageTest {
             driver.quit();
             fail("Deletion of payroll failed");
         }
-
-        //TODO: Add a 'process payroll' test case
         driver.quit();
     }
 
@@ -369,13 +367,18 @@ public class MainPageTest {
         driver.quit(); //exit
     }
 
+    @Test
+    public void testACH() {
+
+    }
 
     //Staff Wizard Tests
+    /*
     @Test
     public void testLoginPage() {
-        /**         The purpose of this test is to ensure the log in features are working           **/
+        //         The purpose of this test is to ensure the log in features are working
         try {
-            /**         Checking Log in page is working            **/
+            //         Checking Log in page is working
             driver.get("https://staging.staffwizardstaging.com/admin/dashboard");   //Go to Staging.StaffWizard to test login page
 
             System.out.println("Page Title: " + driver.getTitle());       //TODO: Apparently the title of the page is blank
@@ -384,7 +387,7 @@ public class MainPageTest {
             Thread.sleep(1000);
 
 
-            /**         Trying to log in with bad credentials**/
+            //         Trying to log in with bad credentials
             driver.findElement(By.name("username")).sendKeys("123456789");      //Entering text in the username field
             Thread.sleep(1000);
 
@@ -399,7 +402,7 @@ public class MainPageTest {
             } else System.out.println("The Invalid Log In Error showed up.");
 
 
-            /**         Verify that the Error Message is removed when going to enter new credentials            **/
+            //         Verify that the Error Message is removed when going to enter new credentials
             driver.findElement(By.name("username")).sendKeys("123");
             Thread.sleep(1000);
 
@@ -411,7 +414,7 @@ public class MainPageTest {
             } else System.out.println("The Invalid Log In Error was removed.");
 
 
-            /**         Trying to log in with no credentials            **/
+            //         Trying to log in with no credentials
             driver.findElement(By.name("username")).sendKeys("");
             Thread.sleep(1000);
 
@@ -426,7 +429,7 @@ public class MainPageTest {
             } else System.out.println("The No Log In Credentials Error showed up.");
 
 
-            /**         Verify that the No Credential Error Message is removed when going to enter new credentials            **/
+            //         Verify that the No Credential Error Message is removed when going to enter new credentials            *
             driver.findElement(By.name("username")).sendKeys("123");
             Thread.sleep(1000);
 
@@ -438,7 +441,7 @@ public class MainPageTest {
             Thread.sleep(1000);
 
 
-            /**         Trying to log in again with good credentials            **/
+            //         Trying to log in again with good credentials
             driver.findElement(By.name("username")).sendKeys("superadmin");
             Thread.sleep(1000);
 
@@ -460,7 +463,7 @@ public class MainPageTest {
 
     @Test
     public void testForgetPassword() {
-        /**         The purpose of this test is to ensure the Forget Password features are working           **/
+        //        The purpose of this test is to ensure the Forget Password features are working
         try {
             driver.get("https://staging.staffwizardstaging.com/admin/dashboard");   //Go to Staging.StaffWizard to test login page
             Thread.sleep(2000);
@@ -500,7 +503,7 @@ public class MainPageTest {
 
     @Test
     public void testSuperAdmin() {
-        /**         The purpose of this test is to ensure the Super Admin account is still working           **/
+        //         The purpose of this test is to ensure the Super Admin account is still working
 
         try {
             staffWizardLogIn(); //Logs in to Staging.StaffWizard
@@ -578,7 +581,7 @@ public class MainPageTest {
 
     @Test
     public void changePassword() {
-        /**         This test verifies that the website's change password feature works         **/
+        //         This test verifies that the website's change password feature works
         WebElement element;
 
         try {
@@ -714,7 +717,7 @@ public class MainPageTest {
 
     @Test
     public void signOut() {
-        /**         This test verifies the sign-out feature works           **/
+        //         This test verifies the sign-out feature works
         try {
             staffWizardLogIn();
         } catch (Exception e) {
@@ -743,6 +746,7 @@ public class MainPageTest {
         }
     }
 
+*/
 
     //Methods
     public void vrollLogin() throws InterruptedException {
