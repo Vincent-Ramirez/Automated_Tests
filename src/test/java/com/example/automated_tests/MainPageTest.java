@@ -88,7 +88,7 @@ public class MainPageTest {
 
         try {//Creating a payroll and processing it
 
-            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[3]/nav/ul/li[1]/a")).click();    //Xpath to the "Payroll" button
+            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[2]/nav/ul/li[1]/a")).click();    //Xpath to the "Payroll" button
             Thread.sleep(1000);
 
             driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[2]/div")).click();    //Xpath to "Start New Payroll"
@@ -177,7 +177,7 @@ public class MainPageTest {
 
 
             //Go to Payroll menu
-            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[3]/nav/ul/li[1]/a"));    //Xpath to the "Payroll" button
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[2]/nav/ul/li[1]/a"));    //Xpath to the "Payroll" button
             currentElement.click();
 
             Thread.sleep(1000);
@@ -249,7 +249,7 @@ public class MainPageTest {
             driver.navigate().refresh();    //refresh page source
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[3]/nav/ul/li[1]/a")).click();    //Xpath to the "Payroll" button
+            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[2]/nav/ul/li[1]/a")).click();    //Xpath to the "Payroll" button
             Thread.sleep(1000);
 
             if (driver.getPageSource().contains("Regression Test")) {   //If regression test payroll is still on the page, fail the test
@@ -288,11 +288,11 @@ public class MainPageTest {
 
         /**         Creating Employee           **/
         try {
-            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[3]/nav/ul/li[3]/a")).click();    //Clicking on "Employees"
+            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[2]/nav/ul/li[3]/a/p/i")).click();    //Clicking on "Employees"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[3]/nav/ul/li[3]/ul/li[1]/a/p")).click();    //All Employees
-            Thread.sleep(1000);
+            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[2]/nav/ul/li[3]/ul/li/a/p")).click();    //All Employees
+            Thread.sleep(2000);
 
             driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[2]/div")).click();    //Clicking on "+ New"
             Thread.sleep(1500);
@@ -358,7 +358,7 @@ public class MainPageTest {
             Thread.sleep(1500);
 
 
-            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr/td[8]/div[4]")).click(); //Clicking delete button
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[8]/div[4]")).click(); //Clicking delete button
             Thread.sleep(1000);
 
             //Accept Alert
