@@ -89,7 +89,7 @@ public class MainPageTest {
         try {//Creating a payroll and processing it
 
             driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[2]/nav/ul/li[1]/a")).click();    //Xpath to the "Payroll" button
-            Thread.sleep(1000);
+            Thread.sleep(2000);
 
             driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[2]/div")).click();    //Xpath to "Start New Payroll"
             Thread.sleep(1000);
@@ -373,6 +373,129 @@ public class MainPageTest {
         }
 
         driver.quit(); //exit
+    }
+
+    @Test
+    public void testVoidChecks() {
+        /**         This tests the void check function         **/
+
+        try {
+            vrollLogin();    //I run this method before the tests to ensure I am logged in
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.out.println("\nStack Trace:");
+            e.printStackTrace();
+            driver.quit();
+            fail("Log In Failed");
+        }
+
+        try {   //Time to void checks
+            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[2]/nav/ul/li[1]/a")).click();    //Xpath to the "Payroll" button
+            Thread.sleep(2000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[2]/div")).click();    //Xpath to "Start New Payroll"
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[1]/div/div/input")).sendKeys("05/01/2022");     //Xpath to "Period Begin Date"
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[2]/div/div/input")).sendKeys("05/07/2022");     //Xpath to "Period End Date"
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[3]/div/div/input")).sendKeys("05/08/2022");     //Xpath to "Check Date"
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[4]/div/div/input")).sendKeys("RT Void - " + java.time.LocalDate.now());     //Xpath to "Description"
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[2]/div/div[1]/div")).click();    //Click Save
+            Thread.sleep(2500);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[10]/div[2]/div[1]")).click();    //Click cog wheel
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[10]/div[2]/div[2]/a[2]")).click();    //Click void check
+            Thread.sleep(2000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[2]/div/div/div[2]/button")).click();  //Click Employee
+            Thread.sleep(1500);
+
+            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[3]")).click();   //Click top employee
+            Thread.sleep(1500);
+
+            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[3]/div/div[3]/div/div/div[2]/button/i")).click();   //Click Payroll Checks
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[2]")).click();   //Click top one
+            Thread.sleep(1500);
+
+            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[4]/div[1]")).click();   //Click "Void Payroll Check"
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[10]/div[4]")).click();   //Edit Payroll
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[14]/div/div/div[2]/button")).click(); //Click Status
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[14]/div/div/div[2]/div/div/div/div/div/div/table/tbody/tr[2]/td")).click();   //Click Completed
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[2]/div/div[1]/div")).click();    //Click Save
+            Thread.sleep(2500);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[5]")).click(); //Filter
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[1]/div[1]/div/input")).sendKeys("05/01/2022");   //Period begin from
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[2]/div[1]/div/input")).sendKeys("05/08/2022");    //Check date from
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[3]/div[1]/div/div[2]/button")).click();   //Payroll Status
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[3]/div[1]/div/div[2]/div/div/div/div/div/div/table/tbody/tr[2]/td")).click(); //Completed
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr/td[10]/div[2]/div[1]/i")).click();  //Click payrolls 'Cog Wheel'
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr/td[10]/div[2]/div[2]/div")).click(); //Click Process Payroll
+            Thread.sleep(20000);
+
+            driver.quit();
+        } catch (Exception e) {
+            System.out.println("\nStack Trace:");
+            e.printStackTrace();
+            driver.quit();
+            fail("Void check failed");
+        }
+    }
+
+    @Test
+    public void testImportTimeslips() {
+        /**         This tests the import timeslips function         **/
+
+        try {
+            vrollLogin();    //I run this method before the tests to ensure I am logged in
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.out.println("\nStack Trace:");
+            e.printStackTrace();
+            driver.quit();
+            fail("Log In Failed");
+        }
+
+        try {   //Time to import timeslips
+
+        } catch (Exception e) {
+            System.out.println("\nStack Trace:");
+            e.printStackTrace();
+            driver.quit();
+            fail("");
+        }
     }
 
     @Test
