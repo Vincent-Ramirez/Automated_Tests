@@ -106,10 +106,31 @@ public class MainPageTest {
             driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[4]/div/div/input")).sendKeys("RT - " + java.time.LocalDate.now());     //Xpath to "Description"
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[14]/div/div/div[2]/button")).click(); //Click Status
+            //driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[2]/div[10]/div/label/span[2]")).click(); //Click Pay Salary  TODO:Find correct path
+            //Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[3]/div[11]/div/label/input[2]")).click(); //Click Pay Hourly
             Thread.sleep(1000);
 
-            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[14]/div/div/div[2]/div/div/div/div/div/div/table/tbody/tr[2]/td")).click();   //Click Completed
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[2]/div/div[1]/div")).click();    //Click Save
+            Thread.sleep(2500);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[10]/div[2]/div[1]/i")).click();  //Click cogwheel
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[10]/div[2]/div[2]/div[1]")).click(); //Populate Payroll
+            Thread.sleep(5000);
+
+            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/button")).click();    //exit task
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[10]/div[4]/i")).click();    //Edit Payroll
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[2]/div[16]/div/div/div[2]/button/i")).click();    //Change Status
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[2]/div[16]/div/div/div[2]/div/div/div/div/div/div/table/tbody/tr[2]/td")).click();    //Click completed
             Thread.sleep(1000);
 
             driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[2]/div/div[1]/div")).click();    //Click Save
@@ -209,10 +230,22 @@ public class MainPageTest {
 
             Thread.sleep(1000);
 
+            driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[3]/div[11]/div/label/input[2]")).click(); //Click Pay Hourly
+            Thread.sleep(1000);
+
             currentElement = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[2]/div/div[1]/div"));       //Xpath to "Save" button
             currentElement.click();
 
             Thread.sleep(7000);     //Give plenty of time for vgroll to create the payroll
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[10]/div[2]/div[1]/i")).click();  //Click cogwheel
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[10]/div[2]/div[2]/div[1]")).click(); //Populate Payroll
+            Thread.sleep(5000);
+
+            driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/button")).click();    //exit task
+            Thread.sleep(1000);
 
             driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[10]/div[2]/div[1]")).click();  //Click payrolls 'Cog Wheel'
 
