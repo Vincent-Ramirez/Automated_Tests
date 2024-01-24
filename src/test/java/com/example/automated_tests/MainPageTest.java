@@ -578,6 +578,220 @@ public class MainPageTest {
         }
     }
 
+    @Test
+    public void setPayrollsAsCompleted() {
+        try {
+            vrollAdminLogin();    //I run this method before the tests to ensure I am logged in
+            //driver.manage().window().maximize();    //This maximizes the browser window
+        } catch (Exception e) {
+            System.out.println("\nStack Trace:");
+            e.printStackTrace();
+            driver.quit();
+            fail("Log In Failed");
+        }
+
+        //Testing start new payroll
+        try {
+            Thread.sleep(2000);
+            WebElement currentElement;
+
+
+            //Go to Payroll drop down
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[2]/nav/ul/li[1]/a"));    //Xpath to the "Payroll" drop down
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            //Go to Payroll menu
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[2]/nav/ul/li[1]/ul/li[1]/a"));    //Xpath to the "All Payrolls" button
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            //filter
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[5]"));    //Xpath to the filter
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            //filter dropdown
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[3]/div[1]/div/div[2]/button/i"));    //Xpath to the status dropdown
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            //status 'Waiting' dropdown
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[3]/div[1]/div/div[2]/div/div/div/div/div/div/table/tbody/tr[1]/td"));    //Xpath to the status 'Waiting' dropdown
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            //Sort Date
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/thead/tr/th[2]"));    //Xpath to sort check date
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            for (int i=0;i<110;i++) {  // i = how many payrolls u need completed
+                //edit payroll
+                currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[11]/div[4]/i"));    //Xpath to edit payroll
+                currentElement.click();
+
+                Thread.sleep(1000);
+
+                //Change Status
+                currentElement = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[1]/div[2]/div[16]/div/div/div[2]/button/i"));    //Xpath to status
+                currentElement.click();
+
+                Thread.sleep(1000);
+
+                //Change completed status
+                currentElement = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[1]/div[2]/div[16]/div/div/div[2]/div/div/div/div/div/div/table/tbody/tr[2]/td"));    //Xpath to completed status
+                currentElement.click();
+
+                Thread.sleep(1000);
+
+                //save payroll
+                currentElement = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[2]/div/div[1]/div"));    //Xpath to save payroll
+                currentElement.click();
+
+                Thread.sleep(1000);
+            }
+            /*
+            //edit payroll
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[11]/div[4]/i"));    //Xpath to edit payroll
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            //Change Status
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[1]/div[2]/div[16]/div/div/div[2]/button/i"));    //Xpath to status
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            //Change completed status
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[1]/div[2]/div[16]/div/div/div[2]/div/div/div/div/div/div/table/tbody/tr[2]/td"));    //Xpath to completed status
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            //save payroll
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[2]/div/div[1]/div"));    //Xpath to save payroll
+            currentElement.click();
+
+            Thread.sleep(1000);*/
+        } catch (Exception e) {
+            System.out.println("\nStack Trace:");
+            e.printStackTrace();
+            //driver.quit();
+            fail("set payroll to completed failed");
+        }
+    }
+
+    @Test
+    public void processPayrolls() {
+        try {
+            vrollAdminLogin();    //I run this method before the tests to ensure I am logged in
+            //driver.manage().window().maximize();    //This maximizes the browser window
+        } catch (Exception e) {
+            System.out.println("\nStack Trace:");
+            e.printStackTrace();
+            driver.quit();
+            fail("Log In Failed");
+        }
+
+        try {
+            Thread.sleep(2000);
+            WebElement currentElement;
+
+
+            //Go to Payroll drop down
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[2]/nav/ul/li[1]/a"));    //Xpath to the "Payroll" drop down
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            //Go to Payroll menu
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[2]/nav/ul/li[1]/ul/li[1]/a"));    //Xpath to the "All Payrolls" button
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            //filter
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[5]"));    //Xpath to the filter
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            //filter dropdown
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[3]/div[1]/div/div[2]/button/i"));    //Xpath to the status dropdown
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            //status 'Completed' dropdown
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[3]/div/div[3]/div[1]/div/div[2]/div/div/div/div/div/div/table/tbody/tr[2]/td"));    //Xpath to the status 'completed' dropdown
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            //Sort Date
+            currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/thead/tr/th[2]/div/i"));    //Xpath to sort check date
+            currentElement.click();
+
+            Thread.sleep(1000);
+
+            for (int i=0;i<10;i++) {  // i = how many payrolls u need completed
+
+                //edit payroll
+                currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[11]/div[4]/i"));    //Xpath to edit payroll
+                currentElement.click();
+
+                Thread.sleep(1000);
+
+                //Change bank
+                currentElement = driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div/div[1]/div[2]/div[7]/div/div/div[2]/button"));    //Xpath to company bank selection
+                currentElement.click();
+
+                Thread.sleep(1000);
+
+                //Change bank
+                currentElement = driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[3]/div/div[1]/div[2]/div[7]/div/div/div[2]/div/div/div/div/div/div/table/tbody/tr/td"));    //Xpath to bank
+                currentElement.click();
+
+                Thread.sleep(1000);
+
+                //save payroll
+                currentElement = driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[2]/div/div[1]/div"));    //Xpath to save payroll
+                currentElement.click();
+
+                Thread.sleep(1000);
+
+                currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[11]/div[2]/div[1]"));    //Xpath to gear icon
+                currentElement.click();
+
+                Thread.sleep(1000);
+
+
+                currentElement = driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[4]/div/table/tbody/tr[1]/td[11]/div[2]/div[2]/div"));    //Xpath to process payroll
+                currentElement.click();
+
+                Thread.sleep(3000);
+
+                currentElement = driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/button"));    //Xpath to exit
+                currentElement.click();
+
+                Thread.sleep(2000);
+            }
+        } catch (Exception e) {
+            System.out.println("\nStack Trace:");
+            e.printStackTrace();
+            //driver.quit();
+            fail("set payroll to completed failed");
+        }
+    }
+
     //Staff Wizard Tests
     /*
     @Test
@@ -972,6 +1186,44 @@ public class MainPageTest {
         //Find password box, select it, enter password
         WebElement password = driver.findElement(By.id("password"));
         password.sendKeys("123");           //Put your password in the ""
+
+        Thread.sleep(1000);
+
+        //click sign in
+        WebElement signInButton = driver.findElement(By.xpath("/html/body/div/form/button"));
+        signInButton.click();
+
+        Thread.sleep(1000);
+
+        //For some reason I get an extra page that pops up I have to click out of on Selenium, this handles that
+        if(!driver.getTitle().equals("StaffWizard Payroll Application")) {
+            WebElement returnToMain = driver.findElement(By.xpath("/html/body/div/section/div/div/p/a"));
+            Thread.sleep(1000);
+            returnToMain.click();
+        }
+
+        //Verify home page title
+        assertEquals(driver.getTitle(), "StaffWizard Payroll Application");
+    }
+
+    //Methods
+    public void vrollAdminLogin() throws InterruptedException {
+        /**                 Throw this before a test so you can log in                      **/
+        driver.get("https://dev.vgroll.com/login"); //Open vgroll
+
+        assertEquals(driver.getTitle(), "Please Sign In");//Verify title page
+
+        Thread.sleep(1000);     //Small wait to allow user to see what's happening
+
+        //Find username box, select it, enter username
+        WebElement username = driver.findElement(By.id("username"));
+        username.sendKeys("admin");       //Put your username in the ""
+
+        Thread.sleep(1000);
+
+        //Find password box, select it, enter password
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys("A4obiVZs");           //Put your password in the ""
 
         Thread.sleep(1000);
 
