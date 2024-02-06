@@ -792,8 +792,87 @@ public class MainPageTest {
         }
     }
 
+
+    //Methods for vgroll
+    public void vrollLogin() throws InterruptedException {
+        /**                 Throw this before a test so you can log in                      **/
+        driver.get("https://dev.vgroll.com/login"); //Open vgroll
+
+        assertEquals(driver.getTitle(), "Please Sign In");//Verify title page
+
+        Thread.sleep(1000);     //Small wait to allow user to see what's happening
+
+        //Find username box, select it, enter username
+        WebElement username = driver.findElement(By.id("username"));
+        username.sendKeys("AutomatedTests");       //Put your username in the ""
+
+        Thread.sleep(1000);
+
+        //Find password box, select it, enter password
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys("123");           //Put your password in the ""
+
+        Thread.sleep(1000);
+
+        //click sign in
+        WebElement signInButton = driver.findElement(By.xpath("/html/body/div/form/button"));
+        signInButton.click();
+
+        Thread.sleep(1000);
+
+        //For some reason I get an extra page that pops up I have to click out of on Selenium, this handles that
+        if(!driver.getTitle().equals("StaffWizard Payroll Application")) {
+            WebElement returnToMain = driver.findElement(By.xpath("/html/body/div/section/div/div/p/a"));
+            Thread.sleep(1000);
+            returnToMain.click();
+        }
+
+        //Verify home page title
+        assertEquals(driver.getTitle(), "StaffWizard Payroll Application");
+    }
+
+    public void vrollAdminLogin() throws InterruptedException {
+        /**                 Throw this before a test so you can log in                      **/
+        driver.get("https://dev.vgroll.com/login"); //Open vgroll
+
+        assertEquals(driver.getTitle(), "Please Sign In");//Verify title page
+
+        Thread.sleep(1000);     //Small wait to allow user to see what's happening
+
+        //Find username box, select it, enter username
+        WebElement username = driver.findElement(By.id("username"));
+        username.sendKeys("admin");       //Put your username in the ""
+
+        Thread.sleep(1000);
+
+        //Find password box, select it, enter password
+        WebElement password = driver.findElement(By.id("password"));
+        password.sendKeys("A4obiVZs");           //Put your password in the ""
+
+        Thread.sleep(1000);
+
+        //click sign in
+        WebElement signInButton = driver.findElement(By.xpath("/html/body/div/form/button"));
+        signInButton.click();
+
+        Thread.sleep(1000);
+
+        //For some reason I get an extra page that pops up I have to click out of on Selenium, this handles that
+        if(!driver.getTitle().equals("StaffWizard Payroll Application")) {
+            WebElement returnToMain = driver.findElement(By.xpath("/html/body/div/section/div/div/p/a"));
+            Thread.sleep(1000);
+            returnToMain.click();
+        }
+
+        //Verify home page title
+        assertEquals(driver.getTitle(), "StaffWizard Payroll Application");
+    }
+
+
+
+
     //Staff Wizard Tests
-    /*
+
     @Test
     public void testLoginPage() {
         //         The purpose of this test is to ensure the log in features are working
@@ -1166,94 +1245,129 @@ public class MainPageTest {
         }
     }
 
-*/
-
-    //Methods
-    public void vrollLogin() throws InterruptedException {
-        /**                 Throw this before a test so you can log in                      **/
-        driver.get("https://dev.vgroll.com/login"); //Open vgroll
-
-        assertEquals(driver.getTitle(), "Please Sign In");//Verify title page
-
-        Thread.sleep(1000);     //Small wait to allow user to see what's happening
-
-        //Find username box, select it, enter username
-        WebElement username = driver.findElement(By.id("username"));
-        username.sendKeys("AutomatedTests");       //Put your username in the ""
-
-        Thread.sleep(1000);
-
-        //Find password box, select it, enter password
-        WebElement password = driver.findElement(By.id("password"));
-        password.sendKeys("123");           //Put your password in the ""
-
-        Thread.sleep(1000);
-
-        //click sign in
-        WebElement signInButton = driver.findElement(By.xpath("/html/body/div/form/button"));
-        signInButton.click();
-
-        Thread.sleep(1000);
-
-        //For some reason I get an extra page that pops up I have to click out of on Selenium, this handles that
-        if(!driver.getTitle().equals("StaffWizard Payroll Application")) {
-            WebElement returnToMain = driver.findElement(By.xpath("/html/body/div/section/div/div/p/a"));
-            Thread.sleep(1000);
-            returnToMain.click();
+    @Test
+    public void CreateSeveralEmployees(){
+        //         This test verifies the sign-out feature works
+        try {
+            staffWizardLogIn();
+        } catch (Exception e) {
+            System.out.println("\nStack Trace:");
+            e.printStackTrace();
+            driver.quit();
+            fail("Sign In Failed");
         }
 
-        //Verify home page title
-        assertEquals(driver.getTitle(), "StaffWizard Payroll Application");
-    }
-
-    //Methods
-    public void vrollAdminLogin() throws InterruptedException {
-        /**                 Throw this before a test so you can log in                      **/
-        driver.get("https://dev.vgroll.com/login"); //Open vgroll
-
-        assertEquals(driver.getTitle(), "Please Sign In");//Verify title page
-
-        Thread.sleep(1000);     //Small wait to allow user to see what's happening
-
-        //Find username box, select it, enter username
-        WebElement username = driver.findElement(By.id("username"));
-        username.sendKeys("admin");       //Put your username in the ""
-
-        Thread.sleep(1000);
-
-        //Find password box, select it, enter password
-        WebElement password = driver.findElement(By.id("password"));
-        password.sendKeys("A4obiVZs");           //Put your password in the ""
-
-        Thread.sleep(1000);
-
-        //click sign in
-        WebElement signInButton = driver.findElement(By.xpath("/html/body/div/form/button"));
-        signInButton.click();
-
-        Thread.sleep(1000);
-
-        //For some reason I get an extra page that pops up I have to click out of on Selenium, this handles that
-        if(!driver.getTitle().equals("StaffWizard Payroll Application")) {
-            WebElement returnToMain = driver.findElement(By.xpath("/html/body/div/section/div/div/p/a"));
+        //Go to employee list
+        try {
+            //Click Employees
+            driver.findElement(By.xpath("/html/body/div[1]/section/aside/aside/div/section/div/ul/li[4]/a")).click();
             Thread.sleep(1000);
-            returnToMain.click();
-        }
 
-        //Verify home page title
-        assertEquals(driver.getTitle(), "StaffWizard Payroll Application");
+            //Click Available Employees
+            driver.findElement(By.xpath("/html/body/div[1]/section/aside/aside/div/section/div/ul/li[4]/ul/li[1]/a/span[1]")).click();
+            Thread.sleep(1000);
+
+            for (int i = 0; i<=50; i++) {
+                //click Add New
+                driver.findElement(By.xpath("/html/body/div[1]/section/section/div/section/div[1]/div/div/div[2]/a[2]")).click();
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("//*[@id=\"f_name\"]")).sendKeys("Firstname" + i);
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("//*[@id=\"l_name\"]")).sendKeys("Lastname" + i);
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("//*[@id=\"searchTextField\"]")).sendKeys("1213 East Trinity Mills Road");
+                Thread.sleep(7000);
+
+            /*
+            //Select State
+            driver.findElement(By.xpath("//*[@id=\"state_field\"]")).click();
+            Thread.sleep(1000);
+
+            //Texas
+            driver.findElement(By.xpath("/html/body/div[1]/section/section/div/form/div[1]/div/div/div/div/div[2]/div/div[1]/div[9]/div/div[2]/select/option[46]")).click();
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("//*[@id=\"city_field\"]")).sendKeys("Carrollton");
+            Thread.sleep(1000);
+
+            driver.findElement(By.xpath("//*[@id=\"zip\"]")).sendKeys("75006");
+            Thread.sleep(1000);
+            */
+
+                driver.findElement(By.xpath("//*[@id=\"phone_format\"]")).sendKeys("0001113333");
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("/html/body/div[1]/section/section/div/form/div[1]/div/div/div/div/div[2]/div/div[2]/div[1]/div/div[3]/input")).click();
+                Thread.sleep(1000);
+
+                if (i < 10) {
+                    driver.findElement(By.xpath("/html/body/div[1]/section/section/div/form/div[1]/div/div/div/div/div[2]/div/div[2]/div[1]/div/div[3]/input")).sendKeys("63948100" + i);
+                    Thread.sleep(1000);
+                } else {
+                    driver.findElement(By.xpath("/html/body/div[1]/section/section/div/form/div[1]/div/div/div/div/div[2]/div/div[2]/div[1]/div/div[3]/input")).sendKeys("6394810" + i);
+                    Thread.sleep(1000);
+                }
+
+                driver.findElement(By.xpath("//*[@id=\"master_region_id\"]")).click();
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("/html/body/div[1]/section/section/div/form/div[1]/div/div/div/div/div[2]/div/div[2]/div[5]/div/div[2]/select/option[7]")).click();
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("//*[@id=\"branch\"]")).click();
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("/html/body/div[1]/section/section/div/form/div[1]/div/div/div/div/div[2]/div/div[2]/div[6]/div/div[2]/select/option[3]")).click();
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("//*[@id=\"pay_type\"]")).click();
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("/html/body/div[1]/section/section/div/form/div[1]/div/div/div/div/div[2]/div/div[2]/div[12]/div/div[2]/select/option[2]")).click();
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("//*[@id=\"status\"]")).click();
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("/html/body/div[1]/section/section/div/form/div[1]/div/div/div/div/div[2]/div/div[2]/div[19]/div/div[2]/select/option[2]")).click();
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("/html/body/div[1]/section/section/div/form/div[1]/div/div/div/div/div[2]/div/div[2]/div[28]/div/div[2]/input")).sendKeys("02-01-2024");
+                Thread.sleep(2000);
+
+                driver.findElement(By.xpath("//*[@id=\"dob\"]")).sendKeys("06271995");
+                Thread.sleep(1500);
+
+                driver.findElement(By.xpath("/html/body/div[1]/section/section/div/form/div[1]/div/div/div/div/div[2]/div/div[2]/div[29]/div/div[2]/input")).sendKeys("02-01-2024");
+                Thread.sleep(1000);
+
+                //Add Employee
+                driver.findElement(By.name("submit1")).click();
+                Thread.sleep(5000);
+            }
+
+        } catch (Exception e) {
+            System.out.println("\nStack Trace:");
+            e.printStackTrace();
+            driver.quit();
+            fail("Add employee(s) failed");
+        }
     }
 
+    //Methods for SW
     public void staffWizardLogIn() throws InterruptedException {
         /**         This is a method to log the user in to Staff Wizard           **/
         /**         Checking Log in page is working                               **/
-        driver.get("https://staging.staffwizardstaging.com/admin/dashboard");   //Go to Staging.StaffWizard to test login page
+        driver.get("https://vinc.staffwizardstaging.com/admin/dashboard");   //Go to Staging.StaffWizard to test login page
         Thread.sleep(1000);
 
         driver.findElement(By.name("username")).sendKeys("superadmin"); //Logging in as super admin
         Thread.sleep(1000);
 
-        driver.findElement(By.name("password")).sendKeys("1234@direct");
+        driver.findElement(By.name("password")).sendKeys("5678@s74ffw1z4rd");
         Thread.sleep(1000);
 
         driver.findElement(By.name("submit")).click();
