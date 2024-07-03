@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -402,8 +404,10 @@ public class MainPageTest {
             System.out.println("\nStack Trace:");
             e.printStackTrace();
             driver.quit();
-            fail("Deletion of employee failed");
+            fail("Log In Failed");
         }
+
+
 
         driver.quit(); //exit
     }
@@ -790,6 +794,135 @@ public class MainPageTest {
             //driver.quit();
             fail("set payroll to completed failed");
         }
+    }
+
+    @Test
+    public void createSeveralEmployees() throws InterruptedException {
+        try {
+            driver.get("https://dev.vgroll.com/login"); //Open vgroll
+
+            assertEquals(driver.getTitle(), "Please Sign In");//Verify title page
+
+            Thread.sleep(1000);     //Small wait to allow user to see what's happening
+
+            //Find username box, select it, enter username
+            WebElement username = driver.findElement(By.id("username"));
+            username.sendKeys("Vincent");       //Put your username in the ""
+
+            Thread.sleep(1000);
+
+            //Find password box, select it, enter password
+            WebElement password = driver.findElement(By.id("password"));
+            password.sendKeys("123");           //Put your password in the ""
+
+            Thread.sleep(1000);
+
+            //click sign in
+            WebElement signInButton = driver.findElement(By.xpath("/html/body/div/form/button"));
+            signInButton.click();
+
+            Thread.sleep(1000);
+
+            //For some reason I get an extra page that pops up I have to click out of on Selenium, this handles that
+            if (!driver.getTitle().equals("StaffWizard Payroll Application")) {
+                WebElement returnToMain = driver.findElement(By.xpath("/html/body/div/section/div/div/p/a"));
+                Thread.sleep(1000);
+                returnToMain.click();
+            }
+
+            //Verify home page title
+            assertEquals(driver.getTitle(), "StaffWizard Payroll Application");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[2]/nav/ul/li[3]/a/p/i")).click();    //Clicking on "Employees"
+        Thread.sleep(1000);
+
+        driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/aside/div[2]/nav/ul/li[3]/ul/li/a/p")).click();    //All Employees
+        Thread.sleep(2000);
+
+        try {
+            for (int i=1; i< 5; i++) {
+
+                driver.findElement(By.xpath("/html/body/div[2]/div[3]/section/div[2]/div[2]/div/div/div[4]/div[2]/div[1]/div[2]/div")).click();    //Clicking on "+ New"
+                Thread.sleep(1500);
+
+                driver.findElement(By.name("employeeId")).sendKeys("FEDOVR" + i);    //Entering "Employee ID"
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[2]/div[2]/div[2]/div[3]/div/i")).click();  //Unlock SSN
+                Thread.sleep(1500);
+
+                if (i < 10) {
+                    driver.findElement(By.name("socialSecurityNumber")).sendKeys("63952000" + i);    //Entering SSN
+                    Thread.sleep(1000);
+                } else if (i < 100) {
+                    driver.findElement(By.name("socialSecurityNumber")).sendKeys("6395200" + i);    //Entering SSN
+                    Thread.sleep(1000);
+                } else {
+                    driver.findElement(By.name("socialSecurityNumber")).sendKeys("639520" + i);    //Entering SSN
+                    Thread.sleep(1000);
+                }
+                //driver.findElement(By.name("socialSecurityNumber")).sendKeys("63950" + i +"9");    //Entering SSN
+                //Thread.sleep(1000);
+
+                driver.findElement(By.name("firstName")).sendKeys("FirstName" + i);    //Entering "First Name"
+                Thread.sleep(1000);
+
+                driver.findElement(By.name("lastName")).sendKeys("TaxOverride" + i); //Entering "Last name"
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[4]/div[1]/div/div/input")).sendKeys("06/27/1995"); //Entering "Birth Date"
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("/html/body/div[2]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[4]/div[2]/div/div/input")).sendKeys("01/01/2024"); //Entering "Hire Date"
+                Thread.sleep(1000);
+
+                driver.findElement(By.name("address1")).sendKeys("12345 Address");  //Entering "Address"
+                Thread.sleep(1000);
+
+                driver.findElement(By.name("city")).sendKeys("City");   //Entering "City"
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("//*[@id=\"employee\"]/div[5]/div[4]/div/div/div[2]/button")).click();    //Clicking "State"
+                Thread.sleep(3000);
+
+                driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[5]/div[4]/div/div/div[2]/div/div/div/div/div/div/table/tbody/tr[1]/td")).click();  //Click Alabama
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("//*[@id=\"employee\"]/div[6]/div[3]/div/div/div[2]/button")).click();    //Click "Home State"
+                Thread.sleep(3000);
+
+                driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[3]/div[14]/div[1]/div[6]/div[3]/div/div/div[2]/div/div/div/div/div/div/table/tbody/tr[1]/td")).click();  //Click Alabama
+                Thread.sleep(1000);
+
+                driver.findElement(By.name("zipCode")).sendKeys("00000");      //Entering "Zip Code"
+                Thread.sleep(1000);
+
+                driver.findElement(By.name("primaryPhone")).sendKeys("0000000000"); //Entering "Phone Number"
+                Thread.sleep(1000);
+
+                driver.findElement(By.name("salaryAmount")).sendKeys("50000"); //Entering Salary
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("//*[@id=\"employee\"]/div[11]/div[2]/div/div/input")).click(); //clicking Status Effective Date
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("//*[@id=\"employee\"]/div[11]/div[2]/div/div/input")).sendKeys("01/01/2024"); //Entering Status Effective Date
+                Thread.sleep(1000);
+
+                driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div/div/div/form/div/div[2]/div/div[1]/div")).click();        //Clicking "Save"
+                Thread.sleep(2000);
+            }
+
+        } catch (Exception e) {
+            System.out.println("\nStack Trace:");
+            e.printStackTrace();
+            driver.quit();
+            fail("Creation of employee failed");
+        }
+        driver.quit();
     }
 
 
@@ -1267,7 +1400,7 @@ public class MainPageTest {
             driver.findElement(By.xpath("/html/body/div[1]/section/aside/aside/div/section/div/ul/li[4]/ul/li[1]/a/span[1]")).click();
             Thread.sleep(1000);
 
-            for (int i = 0; i<=50; i++) {
+            for (int i = 141; i<=200; i++) {
                 //click Add New
                 driver.findElement(By.xpath("/html/body/div[1]/section/section/div/section/div[1]/div/div/div[2]/a[2]")).click();
                 Thread.sleep(1000);
@@ -1306,8 +1439,11 @@ public class MainPageTest {
                 if (i < 10) {
                     driver.findElement(By.xpath("/html/body/div[1]/section/section/div/form/div[1]/div/div/div/div/div[2]/div/div[2]/div[1]/div/div[3]/input")).sendKeys("63948100" + i);
                     Thread.sleep(1000);
-                } else {
+                } if (i < 100) {
                     driver.findElement(By.xpath("/html/body/div[1]/section/section/div/form/div[1]/div/div/div/div/div[2]/div/div[2]/div[1]/div/div[3]/input")).sendKeys("6394810" + i);
+                    Thread.sleep(1000);
+                } else {
+                    driver.findElement(By.xpath("/html/body/div[1]/section/section/div/form/div[1]/div/div/div/div/div[2]/div/div[2]/div[1]/div/div[3]/input")).sendKeys("639481" + i);
                     Thread.sleep(1000);
                 }
 
